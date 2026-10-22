@@ -1,0 +1,32 @@
+{
+  "browser": "Microsoft Edge",
+  "version": "155.0.4283.62",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+  "baseURL": "http://127.0.0.1:3200",
+  "checks": [
+    "Microsoft Edge 155.0.4283.62: login page renders",
+    "four-digit pairing form logs in and browser stores an HttpOnly session",
+    "create-library form enables a five-minute countdown",
+    "empty-library default action shows the expected error feedback",
+    "word form adds English, Chinese and Japanese entries with hints and language tags",
+    "default-library button updates its state and real glasses client reads the three entries",
+    "library settings save name and countdown changes to the server",
+    "word removal updates both rendered rows and glasses-client synchronization",
+    "custom-language input appears and stores a German language tag",
+    "page reload restores the login session, selected default library and saved countdown",
+    "delete-library confirmation removes the library and clears device synchronization",
+    "logout remains effective after reload and consumed pairing code shows an error",
+    "no uncaught page JavaScript errors or HTTP 5xx responses during the browser flow"
+  ],
+  "pageErrors": [],
+  "serverErrors": [],
+  "temporaryAccount": true,
+  "actualDeviceReconnected": false,
+  "checkedAt": "2026-10-22T03:36:31.819Z",
+  "timeZone": "Asia/Shanghai",
+  "screenshots": [
+    "edge-01-login.png",
+    "edge-02-workspace.png",
+    "edge-03-reloaded.png"
+  ]
+}
