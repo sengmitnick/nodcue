@@ -1,0 +1,16 @@
+flowchart LR
+  G["AIUI 眼镜端<br/>读取宿主 accountId<br/>显示配对码<br/>点头朗读词条"]
+  W["浏览器网页<br/>输入码登录<br/>编辑个人词库<br/>Cookie 会话"]
+  S["Node.js 服务<br/>提供网页和 API<br/>配对与会话<br/>个人词库"]
+  D[("PostgreSQL<br/>用户与配对摘要<br/>词库与词条")]
+  G <-->|"设备 API<br/>clientKey + accountId"| S
+  W <-->|"同源 API<br/>四位码 → Cookie"| S
+  S <-->|"按用户读写<br/>事务消费配对码"| D
+  classDef device fill:#e9f3ec,stroke:#477a58,color:#183d27,stroke-width:1.5px
+  classDef web fill:#eaf1fa,stroke:#5980a9,color:#234569,stroke-width:1.5px
+  classDef backend fill:#285e41,stroke:#285e41,color:#fff,stroke-width:1.5px
+  classDef database fill:#fbf2df,stroke:#a1844c,color:#604c25,stroke-width:1.5px
+  class G device
+  class W web
+  class S backend
+  class D database

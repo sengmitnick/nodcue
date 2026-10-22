@@ -1,0 +1,35 @@
+sequenceDiagram
+  participant G as AIUI 眼镜
+  participant W as 浏览器网页
+  participant S as Node.js + PostgreSQL
+  rect rgb(239, 246, 240)
+    Note over G,S: 一、眼镜生成配对码
+    Note over G: 从宿主读取 accountId<br/>用户选择“网页登录”
+    G->>S: POST /api/v1/pairing-codes<br/>clientKey + accountId
+    S->>S: 生成四位码，保存摘要<br/>有效期 30 秒，取消该用户旧码
+    S-->>G: code + publicId + expiresAt
+  end
+  rect rgb(237, 243, 251)
+    Note over G,S: 二、网页兑换用户会话
+    G-->>W: 用户手动输入眼镜显示的四位码
+    W->>S: POST /api/auth/pairing-code
+    alt 码有效且未消费
+      S->>S: 事务锁定记录、检查有效期<br/>标记 consumed，只能兑换一次
+      S-->>W: 设置 nod_session Cookie<br/>HttpOnly · 签名会话 · 7 天
+      W->>S: /api/me + /api/libraries<br/>浏览器自动携带 Cookie
+      S-->>W: 按会话 userId 返回工作台数据
+    else 错误、过期或已使用
+      S-->>W: 拒绝登录，网页提示重新配对
+    end
+    G->>S: 每 2 秒查询 publicId 的配对状态<br/>clientKey + accountId
+    S-->>G: 配对状态，成功时为 consumed
+    Note over G: 收到 consumed 后显示“网页登录成功”
+  end
+  rect rgb(251, 245, 231)
+    Note over G,S: 三、保存后，用户主动刷新眼镜
+    W->>S: 保存词条、设置非空默认词库<br/>Cookie 会话
+    Note over G: 用户从菜单选择“刷新词库”
+    G->>S: POST /api/v1/default-library<br/>clientKey + accountId
+    S-->>G: 默认词库、词条与倒计时
+    Note over G: 更新当前账号缓存并显示词条
+  end

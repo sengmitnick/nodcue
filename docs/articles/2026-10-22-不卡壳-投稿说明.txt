@@ -23,6 +23,9 @@ https://forum.rokid.com/person/post/info?postId=3754&lang=zh-CN
 • 文章与媒体发布目录：../../deliverables/article/，媒体均在其 assets/ 下。
 • 图 1–3：原项目的三张展示图片，原文件直接复制。
 • 图 4：本次 Microsoft Edge 验证的真实网页截图，临时账号标为“Edge 验证”。
+• 两张技术配图：assets/06-login-architecture.png 与 assets/07-pairing-flow.png，分别解释整体架构和配对登录、主动刷新流程。
+• 可编辑图源：diagrams/ 下的 Mermaid .mmd 与 SVG，按当前源码绘制，未改动认证或同步逻辑。
+• 登录章节：区分宿主账号、共享 clientKey、一次性配对码与浏览器会话，说明 30 秒、2 秒轮询、7 天 Cookie 及当前设备身份边界。
 • AR 录屏：原项目 28 秒、720×1280、H.264/AAC 实机视频，未重制。
 • 浏览器验证记录：2026-10-22-Edge验证记录.json；Edge 155.0.4283.62，13 项浏览器检查通过，无未捕获页面异常或 HTTP 5xx。
 • 本地后端：8 项实际 HTTP 联调检查通过，使用真实 PostgreSQL，涵盖 key 更新、配对、同步和重启持久化。
@@ -32,7 +35,7 @@ https://forum.rokid.com/person/post/info?postId=3754&lang=zh-CN
 发帖前还需落实的真实材料
 1. 应用的 AIUI ID、商店页面或审核通过/历史上架证明。现有上架素材不能代替应用的上架证明。
 2. 校对第一人称经历、名称唤起和设备使用表述。当前网页版验证与此前实机录屏已在正文区分。
-3. 复制正文到论坛和 CSDN 时，按图注上传 assets/ 的四张图和 28 秒视频；HTML 为可预览的图文稿，不会自动上传到投稿平台。
+3. 复制正文到论坛和 CSDN 时，按图注上传 assets/ 的六张图（四张截图、两张技术图）和 28 秒视频；HTML 为可预览的图文稿，不会自动上传到投稿平台。
 4. 保持文章与图片中的源码链接指向 NodCue；旧私有仓库只留底。
 5. 两个平台发帖后，补齐公开链接，再填写活动提交表。
 
