@@ -1,0 +1,17 @@
+.DS_Store
+.worktrees/
+node_modules/
+dist/
+*.aix
+.aix/
+*.pptx
+/reference/
+.tmp/
+previews/
+server/data/*.json
+server/data/*.tmp
+.env
+.env.*
+!.env.production.example
+*.local.*
+/src/lib/nod-service-config.js

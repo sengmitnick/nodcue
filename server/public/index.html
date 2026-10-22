@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07110a">
+  <title>不卡壳｜个人词库</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="不卡壳首页">
+      <span class="brand-mark">N</span>
+      <span><strong>不卡壳</strong><small>AIUI MICRO TOOL</small></span>
+    </a>
+    <p>把自己的小麻烦，变成眼前能用的小工具。</p>
+  </header>
+
+  <main>
+    <section id="login-view" class="login-layout">
+      <div class="login-copy">
+        <p class="eyebrow">PAIR WITH YOUR GLASSES</p>
+        <h1>眼镜里的一组词，<br><em>由你来决定。</em></h1>
+        <p class="lead">在眼镜打开“不卡壳”，输入屏幕上的四位配对码。登录后即可创建个人词库、录入任意语言词条，并设置演讲倒计时。</p>
+        <div class="feature-line" aria-label="功能摘要">
+          <span>任意语言</span><i></i><span>默认词库同步</span><i></i><span>可选倒计时</span>
+        </div>
+      </div>
+
+      <form id="pairing-form" class="pairing-card">
+        <div>
+          <p class="card-kicker">GLASSES LOGIN</p>
+          <h2>输入四位配对码</h2>
+          <p>配对码显示在眼镜中，30 秒内有效且只能使用一次。</p>
+        </div>
+        <label for="pairing-code">四位配对码</label>
+        <input id="pairing-code" class="pairing-input" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="4" pattern="[0-9]{4}" placeholder="0000" aria-describedby="pairing-help" required>
+        <span id="pairing-help" class="field-help">只输入数字；过期后可在眼镜单击刷新。</span>
+        <button class="primary-button" type="submit">登录词库工作台 <span>→</span></button>
+      </form>
+    </section>
+
+    <section id="workspace-view" class="workspace" hidden>
+      <div class="workspace-heading">
+        <div>
+          <p class="eyebrow">YOUR WORD LIBRARIES</p>
+          <h1><span id="owner-name">Rokid 用户</span>的词库工作台</h1>
+        </div>
+        <button id="logout-button" class="text-button" type="button">退出登录</button>
+      </div>
+
+      <div class="workspace-grid">
+        <aside class="library-sidebar">
+          <div class="section-heading">
+            <div><span class="step">01</span><h2>创建词库</h2></div>
+            <p>一次演讲、一次讲解，或任何你需要提前准备的内容。</p>
+          </div>
+          <form id="create-library-form" class="stack-form">
+            <label for="library-name">词库名称</label>
+            <input id="library-name" name="name" maxlength="60" placeholder="例如：五分钟试讲" required>
+            <label class="toggle-row" for="library-timer-enabled">
+              <input id="library-timer-enabled" type="checkbox">
+              <span><strong>启用倒计时</strong><small>眼镜底部显示剩余时间</small></span>
+            </label>
+            <div id="library-timer-field" class="timer-field" hidden>
+              <label for="library-minutes">倒计时（分钟）</label>
+              <input id="library-minutes" type="number" min="1" max="240" step="1" value="5">
+            </div>
+            <button class="secondary-button" type="submit">＋ 创建词库</button>
+          </form>
+          <div class="divider"></div>
+          <div class="section-heading compact">
+            <div><span class="step">02</span><h2>我的词库</h2></div>
+          </div>
+          <div id="library-list" class="library-list"></div>
+        </aside>
+
+        <section class="library-editor" aria-label="词库编辑区">
+          <div id="empty-library" class="empty-state">
+            <span class="empty-glyph">↗</span>
+            <h2>先创建一个词库</h2>
+            <p>添加至少一个词条后，就能把它设为默认词库并同步到眼镜。</p>
+          </div>
+
+          <div id="editor-content" hidden>
+            <div class="editor-header">
+              <div>
+                <p id="library-meta" class="card-kicker">0 个词条</p>
+                <h2 id="editor-title">词库</h2>
+              </div>
+              <div class="editor-actions">
+                <button id="default-button" class="primary-button compact-button" type="button">设为默认词库</button>
+                <button id="delete-library-button" class="danger-button" type="button">删除</button>
+              </div>
+            </div>
+
+            <form id="library-settings-form" class="settings-row">
+              <label for="edit-library-name">名称<input id="edit-library-name" maxlength="60" required></label>
+              <label for="edit-library-minutes">倒计时（分钟，留空关闭）<input id="edit-library-minutes" type="number" min="1" max="240" step="1" placeholder="关闭"></label>
+              <button class="text-button" type="submit">保存设置</button>
+            </form>
+
+            <div class="editor-divider"></div>
+            <div class="section-heading inline-heading">
+              <div><span class="step">03</span><h2>添加词条</h2></div>
+              <p>不只英文：中文人名、日语短句、法语术语都可以。</p>
+            </div>
+
+            <form id="word-form" class="word-form">
+              <label for="word-text">词条文本<input id="word-text" maxlength="120" placeholder="例如：provenance / 兵馬俑" required></label>
+              <label for="word-hint">提示（可选）<input id="word-hint" maxlength="120" placeholder="例如：来源与流传"></label>
+              <label for="word-language">朗读语言
+                <select id="word-language">
+                  <option value="auto">自动识别</option>
+                  <option value="zh-CN">中文（普通话）</option>
+                  <option value="en-US">English (US)</option>
+                  <option value="ja-JP">日本語</option>
+                  <option value="ko-KR">한국어</option>
+                  <option value="fr-FR">Français</option>
+                  <option value="es-ES">Español</option>
+                  <option value="custom">其他语言</option>
+                </select>
+              </label>
+              <label id="custom-language-field" for="custom-language" hidden>自定义语言标签<input id="custom-language" placeholder="例如：de-DE"></label>
+              <button class="secondary-button word-submit" type="submit">添加到词库</button>
+            </form>
+
+            <div id="word-list" class="word-list"></div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div id="status" class="status-toast" aria-live="polite" aria-atomic="true"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

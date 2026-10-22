@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "agentName": "演讲发音助手",
+  "agentDesc": "内置演讲易卡词，点头听发音，镜腿切词，并显示十分钟倒计时。",
+  "agentPrompt": "打开演讲发音助手时，直接进入 pages/index/index 页面。",
+  "agentLogo": "",
+  "nativeVersion": "1.0.0",
+  "inkVersion": ">=0.17.0",
+  "permissions": []
+}

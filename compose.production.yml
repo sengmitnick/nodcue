@@ -1,0 +1,45 @@
+name: nod-pronouncer-service
+
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+x-app-environment: &app-environment
+  NODE_ENV: production
+  NOD_SERVER_PORT: 3200
+  DATABASE_URL: ${DATABASE_URL:?DATABASE_URL is required}
+  NOD_CLIENT_KEY: ${NOD_CLIENT_KEY:?NOD_CLIENT_KEY is required}
+  NOD_SESSION_SECRET: ${NOD_SESSION_SECRET:?NOD_SESSION_SECRET is required}
+
+x-app-service: &app-service
+  image: ${NOD_SERVICE_IMAGE:?NOD_SERVICE_IMAGE is required}
+  pull_policy: always
+  environment: *app-environment
+  logging: *default-logging
+  networks: [dokploy-network]
+
+services:
+  migrate:
+    <<: *app-service
+    command: ["npm", "run", "db:migrate"]
+    restart: "no"
+
+  web:
+    <<: *app-service
+    command: ["npm", "start"]
+    restart: unless-stopped
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3200/healthz >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+networks:
+  dokploy-network:
+    external: true

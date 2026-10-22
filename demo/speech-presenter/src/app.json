@@ -1,0 +1,12 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "演讲发音助手",
+    "navigationBarStyle": "custom",
+    "viewport": {
+      "width": "device-width"
+    }
+  }
+}

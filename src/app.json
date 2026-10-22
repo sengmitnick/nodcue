@@ -1,0 +1,12 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "不卡壳",
+    "navigationBarStyle": "custom",
+    "viewport": {
+      "width": "device-width"
+    }
+  }
+}

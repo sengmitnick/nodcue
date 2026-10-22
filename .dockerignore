@@ -1,0 +1,15 @@
+.git
+.github
+.env
+.env.*
+!.env.production.example
+node_modules
+dist
+deliverables
+src
+tests
+docs
+*.aix
+*.pptx
+*.log
+.DS_Store

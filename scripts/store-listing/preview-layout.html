@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>不卡壳助手 · 上架预览查看器</title>
+    <style>
+      :root { color-scheme: dark; background: #030604; }
+      * { box-sizing: border-box; }
+      html, body { width: 1536px; height: 1024px; margin: 0; overflow: hidden; }
+      body { display: grid; place-items: center; background: #030604; }
+      img { display: none; width: 1536px; height: 1024px; object-fit: contain; }
+      img.active { display: block; }
+    </style>
+  </head>
+  <body>
+    <img data-slide="1" src="../../deliverables/store-listing/preview-01-nod.png" alt="不卡壳助手：点头听发音" />
+    <img data-slide="2" src="../../deliverables/store-listing/preview-02-library.png" alt="不卡壳助手：词库由你定义" />
+    <img data-slide="3" src="../../deliverables/store-listing/preview-03-menu.png" alt="不卡壳助手：方向键选择确认" />
+    <script>
+      const requested = new URLSearchParams(location.search).get('slide') || '1';
+      document.querySelector(`[data-slide="${requested}"]`)?.classList.add('active');
+    </script>
+  </body>
+</html>
